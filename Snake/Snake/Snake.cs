@@ -13,6 +13,7 @@ namespace Snake
             pList = new List<Point>();
             for(int i = 0; i < lengh; i++)
             {
+                // Пересоздаём точку и передвигаем её, тем самым рисуя змейку
                 Point p = new Point(tail);
                 p.Move(i, direction);
                 pList.Add(p);

@@ -28,13 +28,13 @@ namespace Snake
             y = _y;
             sym = _sym;
         }
-
+        // Рисуем точку по тем кординтам, по которой она создана
         public void Draw()
         {
             Console.SetCursorPosition(x, y);
             Console.Write(sym);
         }
-
+        // Передвигаем координаты точки на offset в сторону direction
         public void Move(int offset, Direction direction)
         {
             if (direction == Direction.RIGHT)
