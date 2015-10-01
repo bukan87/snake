@@ -25,8 +25,16 @@ namespace Snake
 
             Snake snake = new Snake(new Point(2, 3, '*'), 3, Direction.RIGHT);
             snake.Draw();
+
+            FoodCreator foodCreator = new FoodCreator(80, 25, '$');
+            foodCreator.CreateFood();
+            
             while(true)
             {
+                if (snake.Eat(foodCreator.getPoint()))
+                {
+                    foodCreator.CreateFood();
+                }
                 // Проверим нажата ли кнопка
                 if (Console.KeyAvailable)
                 {
@@ -36,8 +44,7 @@ namespace Snake
                 }
                 Thread.Sleep(100);
                 snake.Move();
-            }            
-            //Console.ReadLine();
+            }
         }
     }
 }
