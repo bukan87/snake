@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Snake
@@ -22,10 +23,21 @@ namespace Snake
             leftLine.Draw();
             rigthLine.Draw();
 
-            Snake snake = new Snake(new Point(2, 3, '*'), 10, Direction.DOWN);
+            Snake snake = new Snake(new Point(2, 3, '*'), 3, Direction.RIGHT);
             snake.Draw();
-                     
-            Console.ReadLine();
+            while(true)
+            {
+                // Проверим нажата ли кнопка
+                if (Console.KeyAvailable)
+                {
+                    // Если таки нажата, то изменим направление в соответсвии с нажатием
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    snake.HandelKey(key.Key);
+                }
+                Thread.Sleep(100);
+                snake.Move();
+            }            
+            //Console.ReadLine();
         }
     }
 }
