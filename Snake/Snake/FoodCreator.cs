@@ -1,38 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Snake
 {
-    class FoodCreator
+    class FoodCreator : GameObjects
     {
         int mapWidht;
         int mapHeight;
         char sym;
-        int x;
-        int y;
 
-        Random random = new Random();
-
-        public FoodCreator(int mapWidht, int mapHeight, char sym)
+        public FoodCreator(char sym)
         {
-            this.mapWidht = mapWidht - 2;
-            this.mapHeight = mapHeight - 2;
+            gameObjects = new List<Figure>();
+            this.mapWidht = Console.BufferWidth - 2;
+            this.mapHeight = Console.BufferHeight - 2;
             this.sym = sym;
         }
-        public void CreateFood()
+
+        public void CreateFood(GameObjects gameObjects, int count)
         {
-            this.x = random.Next(2, this.mapWidht);
-            this.y = random.Next(2, this.mapHeight);
-            Point food = new Point(this.x, this.y, this.sym);
-            food.Draw();
-            //return new Point();
-        }
-        public Point getPoint()
-        {
-            return new Point(x, y, sym);
+            int createdFood = 0;
+            while(createdFood < count)
+            {
+                Food food = new Food(sym);
+                food.CreatFood();
+                // Если еда не пересецается ни с одним из других объектов, то отрисуем их
+                if (!gameObjects.Intersect(food) && !Intersect(food))
+                {
+                    this.gameObjects.Add(food);
+                    food.Draw();
+                    createdFood++;
+                }
+            }
         }
     }
 }

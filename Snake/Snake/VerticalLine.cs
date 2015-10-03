@@ -10,6 +10,7 @@ namespace Snake
     {
         public VerticalLine(int x, int rTop, int rBotom, char sym)
         {
+            objectType = ObjectTypes.WALL;
             pList = new List<Point>();
             for (int y = rTop; y <= rBotom; y++)
             {

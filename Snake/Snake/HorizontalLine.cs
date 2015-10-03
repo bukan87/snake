@@ -10,6 +10,7 @@ namespace Snake
     {
 
         public HorizontalLine(int xLeft, int xReight, int y, char sym) {
+            objectType = ObjectTypes.WALL;
             pList = new List<Point>();
             for (int x = xLeft; x <= xReight; x++) {
                 Point p = new Point(x, y, sym);

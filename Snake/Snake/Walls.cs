@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-    class Walls
+    class Walls : GameObjects
     {
         int width;
         int height;
-
-        List<Figure> wallList;
-
+                
         public Walls(char sym)
         {
-            wallList = new List<Figure>();
-
+            gameObjects = new List<Figure>();
+            
             this.width = Console.BufferWidth;
             this.height = Console.BufferHeight;
                         
@@ -25,18 +23,11 @@ namespace Snake
             VerticalLine leftLine = new VerticalLine(0, 0, this.height - 1, sym);
             VerticalLine rigthLine = new VerticalLine(this.width - 2, 0, this.height - 1, sym);
 
-            wallList.Add(upLine);
-            wallList.Add(downLine);
-            wallList.Add(leftLine);
-            wallList.Add(rigthLine);
+            gameObjects.Add(upLine);
+            gameObjects.Add(downLine);
+            gameObjects.Add(leftLine);
+            gameObjects.Add(rigthLine);
             Draw();
-        }
-        public void Draw()
-        {
-            foreach(var wall in wallList)
-            {
-                wall.Draw();
-            }
         }
     }
 }

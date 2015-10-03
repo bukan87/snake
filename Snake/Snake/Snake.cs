@@ -9,10 +9,11 @@ namespace Snake
     class Snake : Figure
     {
         Direction direction;
-
+        
         public Snake(Point tail, int lengh, Direction _direction)
         {
             direction = _direction;
+            objectType = ObjectTypes.SNAKE;
             pList = new List<Point>();
             for(int i = 0; i < lengh; i++)
             {
@@ -20,6 +21,7 @@ namespace Snake
                 Point p = new Point(tail);
                 p.Move(i, direction);
                 pList.Add(p);
+                Draw();
             }
         }
 
@@ -42,43 +44,48 @@ namespace Snake
             return nextLast;
         }
         // Задание направления
-        public void setDirection(Direction _direction)
+        public void setDirection(Direction direction)
         {
-            direction = _direction;
+            this.direction = direction;
         }
         // Измененение направления змейки в соответствии с нажатиепм кнопки
         public void HandelKey(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow)
             {
-                setDirection(Direction.LEFT);
+                if (direction != Direction.RIGHT)
+                {
+                    setDirection(Direction.LEFT);
+                }
             }
             else if (key == ConsoleKey.RightArrow)
             {
-                setDirection(Direction.RIGHT);
+                if (direction != Direction.RIGHT)
+                {
+                    setDirection(Direction.RIGHT);
+                }
             }
             else if (key == ConsoleKey.DownArrow)
             {
-                setDirection(Direction.DOWN);
+                if (direction != Direction.UP)
+                {
+                    setDirection(Direction.DOWN);
+                }
             }
             else if (key == ConsoleKey.UpArrow)
             {
-                setDirection(Direction.UP);
+                if (direction != Direction.DOWN)
+                {
+                    setDirection(Direction.UP);
+                }
             }
         }
         // Проверяем столкнулся ли с объектом
-        public bool Eat(Point food)
+        public void Eat()
         {
-            Point head = new Point(pList.Last());
-            if(head.IsHit(food))
-            {
-                food.sym = head.sym;
-                pList.Add(food);
-                return true;
-            }else
-            {
-                return false;
-            }
+            Point head = new Point(GetNextPoint());
+            pList.Add(head);
+            head.Draw();
         }
     }
 }
